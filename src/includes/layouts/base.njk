@@ -1,0 +1,19 @@
+<!doctype html>
+<html class="h-100">
+<head>
+    <title>Walk For Hope - {{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ '/css/main.css' | url }}">
+</head>
+<body class="d-flex flex-column h-100">
+    {% include "partials/header.njk" %}
+    <main class="flex-shrink-0">
+  <div class="container">
+    {{content | safe }}
+  </div>
+  <p> </p>
+</main>
+    {% include "partials/footer.njk" %}
+    <script src="{{ '/js/main.js' | url }}"></script>
+</body>
+</html>

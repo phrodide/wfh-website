@@ -1,0 +1,33 @@
+<div class="container-fluid bg-bosw">
+   <div class="row">
+        <div class="col-sm-offset-9 col-xs-6 col-sm-2"><button class="btn btn-light" type="button" onclick="location.href='https://www.disney.com'">DONATE</button></div>
+        <div class="col-sm-9 col-xs"><a class="navbar-brand" href="/">(logo)</a></div>
+        <div class="col-xs-6 col-sm-1 "><button class="btn btn-light" type="button" onclick="location.href='https://www.disney.com'">JOIN A RELAY</button></div>
+    </div>  
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        {% set navPages = collections.all | eleventyNavigation %}
+        {% macro renderNavListItem(entry, isRoot) -%}
+          <li{% if isRoot %} class="nav-item {% if entry.children.length %}dropdown{% endif %}"{% endif %}>
+            {%- if entry.children.length -%}
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown">{{ entry.title }}</a>
+              <ul class="dropdown-menu">
+                {%- for child in entry.children %}{{ renderNavListItem(child, false) }}{% endfor -%}
+              </ul>
+            {%- else -%}
+              <a {% if isRoot %} class="nav-link"{%else%} class="dropdown-item" {% endif %} href="{{ entry.url }}">{{ entry.title }}</a>
+            {%- endif -%}
+          </li>
+        {%- endmacro %}
+
+        <ul class="navbar-nav">
+          {%- for entry in navPages %}{{ renderNavListItem(entry, true) }}{%- endfor -%}
+        </ul>
+    </div>
+  </div>
+</nav>
