@@ -1,37 +1,3 @@
-<footer class="footer mt-auto py-3 bg-light">
-  <nav class="navbar navbar-expand-sm navbar-dark">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  <div class="container">
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      
-       {% set navPages = collections.all | eleventyNavigation("FooterMenu") %}
-        {% macro renderNavListItem(entry, isRoot) -%}
-          <li{% if isRoot %} class="nav-item {% if entry.children.length %}dropdown{% endif %}"{% endif %}>
-            {%- if entry.children.length -%}
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown">{{ entry.title }}</a>
-              <ul class="dropdown-menu">
-                {%- for child in entry.children %}{{ renderNavListItem(child, false) }}{% endfor -%}
-              </ul>
-            {%- else -%}
-              <a {% if isRoot %} class="nav-link"{%else%} class="dropdown-item" {% endif %} href="{{ entry.url }}">{{ entry.title }}</a>
-            {%- endif -%}
-          </li>
-        {%- endmacro %}
-
-        <ul class="navbar-nav">
-          {%- for entry in navPages %}{{ renderNavListItem(entry, true) }}{%- endfor -%}
-        </ul>
-  </div>
-</nav>
-<nav class="navbar navbar-expand-md navbar-dark">
-  <div class="container">
-      <div class="navbar-nav">
-        <a class="nav-link" href="https://www.hud.gov/"><img src="/img/Equal_Housing_Lender_Small.png" width="40px">Equal&nbsp;Housing&nbsp;Lender</a>
-        <span class="navbar-text text-center me-3 mb-3">NOTICE: Bank of the Southwest is not responsible for and has no control over the subject matter, content, information, or graphics of the web sites that have links here.</span>
-        <span class="navbar-text text-end">Copyright&nbsp;{{globals.copyright}}&nbsp;Bank&nbsp;of&nbsp;the&nbsp;Southwest<br>NMLS# 439264</span>
-      </div>
-  </div>
-</nav>
+<footer class="footer mt-auto py-3 bg-primary">
+  Copyright {{globals.copyright}} {{globals.name}}
 </footer>
