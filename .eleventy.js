@@ -12,38 +12,70 @@ function eleventyConfig(config) {
 	// Layout aliases
 	config.addLayoutAlias("base", "layouts/base.njk");
 
-
-// --- START, eleventy-img
-function imageShortcode(src, alt, sizes="(min-width: 1024px) 100vw, 50vw") {
-	console.log(`Generating image(s) from:  ${src}`)
-	let options = {
-		widths: [600, 900, 1500],
-		formats: ["webp", "jpeg"],
-		//urlPath: "/Blog/",
-		outputDir: "./dist/img/",
-		filenameFormat: function (id, src, width, format, options) {
-			const extension = path.extname(src)
-			const name = path.basename(src, extension)
-			return `${name}-${width}w.${format}`
-		}
+//Start
+const markdown = markdownIt()
+markdown.renderer.rules.image = function (tokens, idx, options, env, self) {
+	function figure(html, caption) {
+	  return `<figure>${html}<figcaption>${caption}</figcaption></figure>`
 	}
-
-	// generate images
-	Image(src, options)
-
-	let imageAttributes = {
-		alt,
-		sizes,
-		loading: "lazy",
-		decoding: "async",
+  
+	const token = tokens[idx]
+	let imgSrc = token.attrGet('src')
+	const imgAlt = token.content
+	const imgTitle = token.attrGet('title')
+  
+	const htmlOpts = { alt: imgAlt, loading: 'lazy', decoding: 'async' }
+	imgSrc = path.normalize(path.join(path.parse(env.page.inputPath).dir,imgSrc))
+	console.log(`Generating image(s) from:  ${imgSrc}`)
+  
+	const parsed = (imgTitle || '').match(
+	  /^(?<skip>@skip(?:\[(?<width>\d+)x(?<height>\d+)\])? ?)?(?:\?\[(?<sizes>.*?)\] ?)?(?<caption>.*)/
+	).groups
+  
+	if (parsed.skip || imgSrc.startsWith('http')) {
+	  const options = { ...htmlOpts }
+	  if (parsed.sizes) {
+		options.sizes = parsed.sizes
+	  }
+  
+	  const metadata = { jpeg: [{ url: imgSrc }] }
+	  if (parsed.width && parsed.height) {
+		metadata.jpeg[0].width = parsed.width
+		metadata.jpeg[0].height = parsed.height
+	  }
+  
+	  const generated = Image.generateHTML(metadata, options)
+  
+	  if (parsed.caption) {
+		return figure(generated, parsed.caption)
+	  }
+	  return generated
 	}
-	// get metadata
-	metadata = Image.statsSync(src, options)
-	return Image.generateHTML(metadata, imageAttributes)
-}
-// --- END, eleventy-img
-
-
+  
+	const widths = [250, 316, 426, 460, 580, 768]
+	const imgOpts = {
+	  widths: widths
+		.concat(widths.map((w) => w * 2)) // generate 2x sizes
+		.filter((v, i, s) => s.indexOf(v) === i), // dedupe
+	  formats: ['webp', 'jpeg'], // TODO: add avif when support is good enough
+	  outputDir: './dist/img/'
+	}
+  
+	Image(imgSrc, imgOpts)
+  
+	const metadata = Image.statsSync(imgSrc, imgOpts)
+  
+	const generated = Image.generateHTML(metadata, {
+	  sizes: parsed.sizes || '(max-width: 768px) 100vw, 768px',
+	  ...htmlOpts
+	})
+  
+	if (parsed.caption) {
+	  return figure(generated, parsed.caption)
+	}
+	return generated
+  }
+//End
 
 
 	// Minify HTML
@@ -63,7 +95,7 @@ function imageShortcode(src, alt, sizes="(min-width: 1024px) 100vw, 50vw") {
 		html: true
 	});
 	
-	//config.addShortcode("image", imageShortcode)
+	config.setLibrary('md', markdown)
 	config.addPairedShortcode("markdown", (content) => {
 		return md.render(content);
 	});
