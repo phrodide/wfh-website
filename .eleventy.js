@@ -18,7 +18,7 @@ function eleventyConfig(config) {
 				useShortDoctype: true,
 				removeComments: true,
 				collapseWhitespace: true,
-				minifyCSS: true
+				minifyCSS: false
 			});
 		}
 	}
