@@ -5,16 +5,14 @@
   "scripts": {
     "start": "run-p serve:eleventy watch:parcel",
     "serve:eleventy": "cross-env ELEVENTY_ENV=local eleventy --serve",
-    "watch:parcel": "run-p watch:css watch:js watch:images",
-    "watch:css": "parcel watch ./src/scss/main.scss --dist-dir ./dist/css",
-    "watch:js": "parcel watch ./src/js/main.js --dist-dir ./dist/js",
-    "watch:images": "parcel watch ./src/img/*",
+    "watch:parcel": "run-p watch:css watch:js",
+    "watch:css": "parcel watch ./src/scss/main.scss --port 5566 --dist-dir ./dist/css",
+    "watch:js": "parcel watch ./src/js/main.js --port 5567 --dist-dir ./dist/js",
     "build": "run-s build:parcel build:eleventy",
     "build:eleventy": "cross-env ELEVENTY_ENV=production eleventy",
-    "build:parcel": "run-p build:css build:js build:images",
-    "build:css": "parcel build ./src/scss/main.scss --dist-dir ./dist/css --log-level error",
-    "build:js": "parcel build ./src/js/main.js --dist-dir ./dist/js --log-level error",
-    "build:images": "parcel build src/assets/img/*",
+    "build:parcel": "run-p build:css build:js",
+    "build:css": "parcel build ./src/scss/main.scss --port 5566 --dist-dir ./dist/css",
+    "build:js": "parcel build ./src/js/main.js --port 5567 --dist-dir ./dist/js",
     "clean": "rm -rf dist"
   },
   "keywords": [],
@@ -23,6 +21,7 @@
   "devDependencies": {
     "@11ty/eleventy": "^2.0.0",
     "@11ty/eleventy-navigation": "^0.3.5",
+    "@11ty/eleventy-img": "^3.0.0",
     "@parcel/transformer-sass": "^2.2.1",
     "autoprefixer": "^10.4.13",
     "cross-env": "^7.0.3",
@@ -31,7 +30,8 @@
     "nunjucks": "^3.2.3",
     "parcel": "^2.2.1",
     "postcss": "^8.4.5",
-    "sass": "^1.49.0"
+    "sass": "^1.49.0",
+    "sharp": "^0.31.3"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.2",
