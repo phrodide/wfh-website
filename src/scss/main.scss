@@ -9,25 +9,6 @@
         @extend .nav-link;
       }
     }
-    /*li:has(ul)
-    {
-        @extend .dropdown;
-        a 
-        {
-            @extend .dropdown-toggle;
-        }
-        ul
-        {
-            @extend .dropdown-menu;
-            li
-            {
-                a
-                {
-                    @extend .dropdown-item;
-                }
-            }
-        }
-    }*/
   }
 }
 body {
@@ -76,8 +57,4 @@ footer a:focus {
 h1, h2, h3, h4, h5, h6
 {
   color: #255686;
-}
-a[title=learnmore] {
- @extend .btn;
- @extend .btn-primary
 }
