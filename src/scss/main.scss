@@ -1,4 +1,8 @@
 @import "~bootstrap/scss/bootstrap";
+.wfh-banner img
+{
+  width: 100%;
+}
 .nav-bosw-top {
   ul {
     @extend .navbar-nav;
@@ -30,7 +34,7 @@ body {
   border-width: 0 0 1px;
 }
 .navbar-brand img {
-  max-height: 40px;
+  max-height: 100px;
   max-width: 100%;
 }
 .navbar-fixed-top,
