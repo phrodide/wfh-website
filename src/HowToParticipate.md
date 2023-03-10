@@ -18,5 +18,5 @@ We encourage you to participate in any way that you can!
   - [Join a Team][register]
 - **Volunteer!** This is a big event that is just one night, but the cause is all year long! We can use your dedication in any way that you feel most effective. Whether helping the night of or during the year, we would most certainly welcome the help.
 
-[def]: /Donate/
+[def]: /DonateLink/
 [register]: /Register/
