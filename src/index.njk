@@ -2,20 +2,30 @@
 layout: base
 title: Home
 permalink: '/'
+numberOfLatestPostsToShow: 3
 ---
 <div class="container-fluid wfh-banner">
     <img class="img-fluid" src="img/banner.jpg" alt="luminarias" style="margin:0">
 </div>
+  <h2 style="background: url(/img/bracket_line.gif) 0 50% repeat-x; text-align: center"><span style="background: white; z-index: 5">Details</span></h2>
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      Hi
+      {%markdown%}{% include "partials/FrontPage1of3.md" %}{%endmarkdown%}
     </div>
     <div class="col-md-4">
-      Hello
+      {%markdown%}{% include "partials/FrontPage2of3.md" %}{%endmarkdown%}
     </div>
     <div class="col-md-4">
-      How are you
+      {%markdown%}{% include "partials/FrontPage3of3.md" %}{%endmarkdown%}
+    </div>
+  </div>
+  <h2 style="background: url(/img/bracket_line.gif) 0 50% repeat-x; text-align: center"><span style="background: white; z-index: 5">New Posts</span></h2>
+  <div class="container">
+    <div class="row">
+      {% set postslist = collections.posts | head(-1 * numberOfLatestPostsToShow) %}
+      {% set postslistCounter = postsCount %}
+      {% include "postslist.njk" %}
     </div>
   </div>
 </div> 

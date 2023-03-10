@@ -1,3 +1,4 @@
+const { DateTime } = require("luxon");
 const htmlmin = require('html-minifier');
 const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 const markdownIt = require("markdown-it");
@@ -11,6 +12,13 @@ function eleventyConfig(config) {
 
 	// Layout aliases
 	config.addLayoutAlias("base", "layouts/base.njk");
+	const mdShortcode = new markdownIt({
+		html: true
+	});
+	
+	config.addPairedShortcode("markdown", (content) => {
+		return mdShortcode.render(content);
+	});
 
 //Start
 const markdown = markdownIt()
@@ -77,6 +85,30 @@ markdown.renderer.rules.image = function (tokens, idx, options, env, self) {
   }
 //End
 
+config.addCollection("posts", function(collection) {
+    return collection.getFilteredByGlob("src/Blog/*.md");
+});
+
+config.addFilter("head", (array, n) => {
+	if(!Array.isArray(array) || array.length === 0) {
+		return [];
+	}
+	if( n < 0 ) {
+		return array.slice(n);
+	}
+
+	return array.slice(0, n);
+});
+
+config.addFilter("readableDate", (dateObj, format, zone) => {
+	// Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
+	return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(format || "dd LLLL yyyy");
+});
+
+config.addFilter('htmlDateString', (dateObj) => {
+	// dateObj input: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
+	return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat('yyyy-LL-dd');
+});
 
 	// Minify HTML
 	const isProduction = process.env.ELEVENTY_ENV === "production";
