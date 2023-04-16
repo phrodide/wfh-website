@@ -1,4 +1,7 @@
+$bootstrap-icons-font-dir: "~node_modules/bootstrap-icons/font/fonts";
+//$bootstrap-icons-font-src: url("../../node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2") format("woff2"), url("../../node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff") format("woff");
 @import "~bootstrap/scss/bootstrap";
+@import "~bootstrap-icons/font/bootstrap-icons";
 .wfh-banner img
 {
   width: 100%;
@@ -61,4 +64,28 @@ footer a:focus {
 h1, h2, h3, h4, h5, h6
 {
   color: #255686;
+}
+.wfh-fpbox1
+{
+  h1
+  {
+    @extend .bi;
+    @extend .bi-calendar-check;
+  }
+}
+.wfh-fpbox2
+{
+  h1
+  {
+    @extend .bi;
+    @extend .bi-compass;
+  }
+}
+.wfh-fpbox3
+{
+  h1
+  {
+    @extend .bi;
+    @extend .bi-chat-left-dots;
+  }
 }
