@@ -4,6 +4,7 @@ const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 const markdownIt = require("markdown-it");
 const Image = require("@11ty/eleventy-img");
 const path = require('path');
+const sharp = require('sharp');
 
 function eleventyConfig(config) {
 	// Passthroughs
@@ -15,105 +16,116 @@ function eleventyConfig(config) {
 	const mdShortcode = new markdownIt({
 		html: true
 	});
-	
+
 	config.addPairedShortcode("markdown", (content) => {
 		return mdShortcode.render(content);
 	});
 
-//Start
-const markdown = markdownIt()
-markdown.renderer.rules.image = function (tokens, idx, options, env, self) {
-	function figure(html, caption) {
-	  return `<figure>${html}<figcaption>${caption}</figcaption></figure>`
-	}
-  
-	const token = tokens[idx]
-	let imgSrc = token.attrGet('src')
-	const imgAlt = token.content
-	const imgTitle = token.attrGet('title')
-  
-	const htmlOpts = { alt: imgAlt, loading: 'lazy', decoding: 'async' }
-	imgSrc = path.normalize(path.join(path.parse(env.page.inputPath).dir,imgSrc))
-	console.log(`Generating image(s) from:  ${imgSrc}`)
-  
-	const parsed = (imgTitle || '').match(
-	  /^(?<skip>@skip(?:\[(?<width>\d+)x(?<height>\d+)\])? ?)?(?:\?\[(?<sizes>.*?)\] ?)?(?<caption>.*)/
-	).groups
-  
-	if (parsed.skip || imgSrc.startsWith('http')) {
-	  const options = { ...htmlOpts }
-	  if (parsed.sizes) {
-		options.sizes = parsed.sizes
-	  }
-  
-	  const metadata = { jpeg: [{ url: imgSrc }] }
-	  if (parsed.width && parsed.height) {
-		metadata.jpeg[0].width = parsed.width
-		metadata.jpeg[0].height = parsed.height
-	  }
-  
-	  const generated = Image.generateHTML(metadata, options)
-  
-	  if (parsed.caption) {
-		return figure(generated, parsed.caption)
-	  }
-	  return generated
-	}
-  
-	const widths = [250, 316, 426, 460, 580, 768]
-	const imgOpts = {
-	  widths: widths
-		.concat(widths.map((w) => w * 2)) // generate 2x sizes
-		.filter((v, i, s) => s.indexOf(v) === i), // dedupe
-	  formats: ['webp', 'jpeg'], // TODO: add avif when support is good enough
-	  outputDir: './dist/img/'
-	}
-  
-	Image(imgSrc, imgOpts)
-  
-	const metadata = Image.statsSync(imgSrc, imgOpts)
-  
-	const generated = Image.generateHTML(metadata, {
-	  sizes: parsed.sizes || '(max-width: 768px) 100vw, 768px',
-	  ...htmlOpts
-	})
-  
-	if (parsed.caption) {
-	  return figure(generated, parsed.caption)
-	}
-	return generated
-  }
-//End
+	const srcBanner = 'src/img/portfolio6.jpg';
+	const sharpBannerOptions = { fit: sharp.fit.cover, position: "left top" };
+	//Render the banner to auto size
+	sharp(srcBanner).resize(1920,920,sharpBannerOptions).toFile('dist/img/banner-1920.jpg');
+	sharp(srcBanner).resize(1600,920,sharpBannerOptions).toFile('dist/img/banner-1600.jpg');
+	sharp(srcBanner).resize(1280,920,sharpBannerOptions).toFile('dist/img/banner-1280.jpg');
+	sharp(srcBanner).resize(992,920,sharpBannerOptions).toFile('dist/img/banner-992.jpg');
+	sharp(srcBanner).resize(768,920,sharpBannerOptions).toFile('dist/img/banner-768.jpg');
+	
 
-config.addCollection("posts", function(collection) {
-    return collection.getFilteredByGlob("src/Blog/*.md");
-});
 
-config.addFilter("head", (array, n) => {
-	if(!Array.isArray(array) || array.length === 0) {
-		return [];
+	//Start
+	const markdown = markdownIt()
+	markdown.renderer.rules.image = function (tokens, idx, options, env, self) {
+		function figure(html, caption) {
+			return `<figure>${html}<figcaption>${caption}</figcaption></figure>`
+		}
+
+		const token = tokens[idx]
+		let imgSrc = token.attrGet('src')
+		const imgAlt = token.content
+		const imgTitle = token.attrGet('title')
+
+		const htmlOpts = { alt: imgAlt, loading: 'lazy', decoding: 'async' }
+		imgSrc = path.normalize(path.join(path.parse(env.page.inputPath).dir, imgSrc))
+		console.log(`Generating image(s) from:  ${imgSrc}`)
+
+		const parsed = (imgTitle || '').match(
+			/^(?<skip>@skip(?:\[(?<width>\d+)x(?<height>\d+)\])? ?)?(?:\?\[(?<sizes>.*?)\] ?)?(?<caption>.*)/
+		).groups
+
+		if (parsed.skip || imgSrc.startsWith('http')) {
+			const options = { ...htmlOpts }
+			if (parsed.sizes) {
+				options.sizes = parsed.sizes
+			}
+
+			const metadata = { jpeg: [{ url: imgSrc }] }
+			if (parsed.width && parsed.height) {
+				metadata.jpeg[0].width = parsed.width
+				metadata.jpeg[0].height = parsed.height
+			}
+
+			const generated = Image.generateHTML(metadata, options)
+
+			if (parsed.caption) {
+				return figure(generated, parsed.caption)
+			}
+			return generated
+		}
+
+		const widths = [250, 316, 426, 460, 580, 768]
+		const imgOpts = {
+			widths: widths
+				.concat(widths.map((w) => w * 2)) // generate 2x sizes
+				.filter((v, i, s) => s.indexOf(v) === i), // dedupe
+			formats: ['webp', 'jpeg'], // TODO: add avif when support is good enough
+			outputDir: './dist/img/'
+		}
+
+		Image(imgSrc, imgOpts)
+
+		const metadata = Image.statsSync(imgSrc, imgOpts)
+
+		const generated = Image.generateHTML(metadata, {
+			sizes: parsed.sizes || '(max-width: 768px) 100vw, 768px',
+			...htmlOpts
+		})
+
+		if (parsed.caption) {
+			return figure(generated, parsed.caption)
+		}
+		return generated
 	}
-	if( n < 0 ) {
-		return array.slice(n);
-	}
+	//End
 
-	return array.slice(0, n);
-});
+	config.addCollection("posts", function (collection) {
+		return collection.getFilteredByGlob("src/Blog/*.md");
+	});
 
-config.addFilter("readableDate", (dateObj, format, zone) => {
-	// Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
-	return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(format || "dd LLLL yyyy");
-});
+	config.addFilter("head", (array, n) => {
+		if (!Array.isArray(array) || array.length === 0) {
+			return [];
+		}
+		if (n < 0) {
+			return array.slice(n);
+		}
 
-config.addFilter('htmlDateString', (dateObj) => {
-	// dateObj input: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
-	return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat('yyyy-LL-dd');
-});
+		return array.slice(0, n);
+	});
+
+	config.addFilter("readableDate", (dateObj, format, zone) => {
+		// Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
+		return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(format || "dd LLLL yyyy");
+	});
+
+	config.addFilter('htmlDateString', (dateObj) => {
+		// dateObj input: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
+		return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat('yyyy-LL-dd');
+	});
 
 	// Minify HTML
 	const isProduction = process.env.ELEVENTY_ENV === "production";
 
-	var htmlMinify = function(value, outputPath) {
+	var htmlMinify = function (value, outputPath) {
 		if (outputPath && outputPath.indexOf('.html') > -1) {
 			return htmlmin.minify(value, {
 				useShortDoctype: true,
@@ -126,7 +138,7 @@ config.addFilter('htmlDateString', (dateObj) => {
 	const md = new markdownIt({
 		html: true
 	});
-	
+
 	config.setLibrary('md', markdown)
 	config.addPairedShortcode("markdown", (content) => {
 		return md.render(content);
@@ -136,7 +148,7 @@ config.addFilter('htmlDateString', (dateObj) => {
 	if (isProduction) {
 		config.addTransform("htmlmin", htmlMinify);
 	}
-	
+
 	config.addPlugin(eleventyNavigationPlugin);
 
 	// Configuration
