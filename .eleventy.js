@@ -21,14 +21,6 @@ function eleventyConfig(config) {
 		return mdShortcode.render(content);
 	});
 
-	const srcBanner = 'src/img/portfolio6.jpg';
-	const sharpBannerOptions = { fit: sharp.fit.cover, position: "left top" };
-	//Render the banner to auto size
-	sharp(srcBanner).resize(1920,920,sharpBannerOptions).toFile('src/img/banner-1920.jpg');
-	sharp(srcBanner).resize(1600,920,sharpBannerOptions).toFile('src/img/banner-1600.jpg');
-	sharp(srcBanner).resize(1280,920,sharpBannerOptions).toFile('src/img/banner-1280.jpg');
-	sharp(srcBanner).resize(992,920,sharpBannerOptions).toFile('src/img/banner-992.jpg');
-	sharp(srcBanner).resize(768,920,sharpBannerOptions).toFile('src/img/banner-768.jpg');
 	
 
 
@@ -142,6 +134,24 @@ function eleventyConfig(config) {
 	config.setLibrary('md', markdown)
 	config.addPairedShortcode("markdown", (content) => {
 		return md.render(content);
+	});
+
+	config.addPairedShortcode("wfhbanner", (content) => {
+		const widths = [768,992,1280,1600,1920];
+		const srcBanner = 'src/img/portfolio6.jpg';
+		const sharpBannerOptions = { fit: sharp.fit.cover, position: "left top" };
+		var srcset = "";
+		//Render the banner to auto size
+		for (var i=0; i < widths.length; i++)
+		{
+			sharp(srcBanner).resize(widths[i],620,sharpBannerOptions).toFile('dist/img/banner-' + widths[i] + '.jpg');
+			if (srcset.length!=0)
+			{
+				srcset += ", ";
+			}
+			srcset += "img/banner-" + widths[i] + ".jpg " + widths[i] + "w";
+		}
+		return "<img class='img-fluid' src='img/banner-" + widths[0] + ".jpg' srcset='" + srcset + "' alt='luminarias' style='margin:0'>";
 	});
 
 	// html min only in production
