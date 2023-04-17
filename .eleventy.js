@@ -24,11 +24,11 @@ function eleventyConfig(config) {
 	const srcBanner = 'src/img/portfolio6.jpg';
 	const sharpBannerOptions = { fit: sharp.fit.cover, position: "left top" };
 	//Render the banner to auto size
-	sharp(srcBanner).resize(1920,920,sharpBannerOptions).toFile('dist/img/banner-1920.jpg');
-	sharp(srcBanner).resize(1600,920,sharpBannerOptions).toFile('dist/img/banner-1600.jpg');
-	sharp(srcBanner).resize(1280,920,sharpBannerOptions).toFile('dist/img/banner-1280.jpg');
-	sharp(srcBanner).resize(992,920,sharpBannerOptions).toFile('dist/img/banner-992.jpg');
-	sharp(srcBanner).resize(768,920,sharpBannerOptions).toFile('dist/img/banner-768.jpg');
+	sharp(srcBanner).resize(1920,920,sharpBannerOptions).toFile('src/img/banner-1920.jpg');
+	sharp(srcBanner).resize(1600,920,sharpBannerOptions).toFile('src/img/banner-1600.jpg');
+	sharp(srcBanner).resize(1280,920,sharpBannerOptions).toFile('src/img/banner-1280.jpg');
+	sharp(srcBanner).resize(992,920,sharpBannerOptions).toFile('src/img/banner-992.jpg');
+	sharp(srcBanner).resize(768,920,sharpBannerOptions).toFile('src/img/banner-768.jpg');
 	
 
 
