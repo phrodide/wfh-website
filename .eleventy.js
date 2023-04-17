@@ -109,6 +109,18 @@ function eleventyConfig(config) {
 		return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(format || "dd LLLL yyyy");
 	});
 
+	config.addFilter("wfh_currency", (number) => {
+		const cformatter = new Intl.NumberFormat('en-US', {
+			style: 'currency',
+			currency: 'USD',
+		  
+			// These options are needed to round to whole numbers if that's what you want.
+			//minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+			//maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+		  });
+		  return cformatter.format(number);
+	});
+
 	config.addFilter('htmlDateString', (dateObj) => {
 		// dateObj input: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
 		return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat('yyyy-LL-dd');
@@ -188,7 +200,7 @@ function extractExcerpt(article) {
 
     const content = article.templateContent;  
 
-    const excerpt = content;//.slice(0, content.indexOf("\n"));
+    const excerpt = content.slice(0, content.indexOf("\n"));
 
     return excerpt;
 }

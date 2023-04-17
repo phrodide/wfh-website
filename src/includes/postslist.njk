@@ -1,7 +1,7 @@
 <ul class="postlist">
 {% for post in postslist | reverse %}
 	<li class="postlist-item{% if post.url == url %} postlist-item-active{% endif %}">
-		<a href="{{ post.url }}" class="postlist-link"><p>{% excerpt post %}</p></a>
+		<a href="{{ post.url }}" class="postlist-link">{% excerpt post %}</a>
 		
 		<time class="postlist-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate("LLLL dd yyyy") }}</time>
 	</li>

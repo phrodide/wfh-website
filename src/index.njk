@@ -32,9 +32,10 @@ numberOfLatestPostsToShow: 3
   <h2 style="background: url(/img/bracket_line.gif) 0 50% repeat-x; text-align: center"><span style="background: white; z-index: 5">Event Fundraising</span></h2>
   <div class="container">
     <div class="row">
-      {% set postslist = collections.posts | head(-1 * numberOfLatestPostsToShow) %}
-      {% set postslistCounter = postsCount %}
-      {% include "postslist.njk" %}
+      <p>Our current fundraising goal. Updated weekly.</p>
+      <div class="progress" role="progressbar">
+        <div class="progress-bar" style="width: {{ progress / goal * 100 }}%">{{ progress | wfh_currency }}</div>
+      </div>
     </div>
   </div>
 </div> 
