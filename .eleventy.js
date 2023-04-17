@@ -64,7 +64,7 @@ function eleventyConfig(config) {
 			return generated
 		}
 
-		const widths = [250, 316, 426, 460, 580, 768]
+		const widths = [250]
 		const imgOpts = {
 			widths: widths
 				.concat(widths.map((w) => w * 2)) // generate 2x sizes
@@ -136,6 +136,9 @@ function eleventyConfig(config) {
 		return md.render(content);
 	});
 
+
+	config.addShortcode("excerpt", (article) =>	extractExcerpt(article));
+
 	config.addPairedShortcode("wfhbanner", (content) => {
 		const widths = [768,992,1280,1600,1920];
 		const srcBanner = 'src/img/portfolio6.jpg';
@@ -174,5 +177,20 @@ function eleventyConfig(config) {
 		markdownTemplateEngine: "njk",
 	};
 };
+
+function extractExcerpt(article) {
+    if (!Object.prototype.hasOwnProperty.call(article, "templateContent")) {
+        console.warn(
+            'Failed to extract excerpt: Document has no property "templateContent".'
+        );
+        return null;
+    }
+
+    const content = article.templateContent;  
+
+    const excerpt = content;//.slice(0, content.indexOf("\n"));
+
+    return excerpt;
+}
 
 module.exports = eleventyConfig;
