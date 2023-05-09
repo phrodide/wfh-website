@@ -5,6 +5,7 @@ const markdownIt = require("markdown-it");
 const Image = require("@11ty/eleventy-img");
 const path = require('path');
 const sharp = require('sharp');
+const htmlparser2 = require('htmlparser2');
 
 function eleventyConfig(config) {
 	// Passthroughs
@@ -199,8 +200,13 @@ function extractExcerpt(article) {
     }
 
     const content = article.templateContent;  
+	const dom = htmlparser2.parseDocument(content);
+	const firstP = htmlparser2.DomUtils.findOne(function (elem) {
+		return elem.name==='p';
+	},dom.childNodes);
+	const content2 = htmlparser2.DomUtils.innerText(firstP);
 
-    const excerpt = content.slice(0, content.indexOf("\n"));
+    const excerpt = content.slice(0, content.indexOf("\n")) + "<p>" + content2 + "</p>";
 
     return excerpt;
 }
