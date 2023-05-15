@@ -3,8 +3,8 @@
 
 [![Facebook](/img/facebook.svg "Facebook")](/) [![Twitter](/img/twitter.svg "Twitter")](/)
 
-Sean Lee
+The Walk For Hope Committee
 
-[slee@cancer.org](mailto:slee@cancer.org)
+[walkforhoperoswell@gmail.com](mailto:walkforhoperoswell@gmail.com)
 
-575-999-8888
+575-637-8132

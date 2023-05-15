@@ -9,8 +9,8 @@ eleventyNavigation:
 
 # Contact Us
 
-Phone: 575-347-1030
+Phone: 575-637-8132
 
-Email: walkforhope15@yahoo.com
+Email: walkforhoperoswell@gmail.com
 
 Location: Gateway Christian School Football Field
