@@ -1,7 +1,7 @@
 #
 ## Follow Event
 
-[![Facebook](/img/facebook.svg "Facebook")](/) [![Twitter](/img/twitter.svg "Twitter")](/)
+[![Facebook](/img/facebook.svg "Facebook")](https://www.facebook.com/WalkforHopeChavesCounty)
 
 The Walk For Hope Committee
 
