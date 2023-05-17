@@ -1,14 +1,19 @@
 <div class="container">
 {% for post in postslist | reverse %}
-  <h4 style="background: url(/img/bracket_line.gif) 0 50% repeat-x; text-align: center"><span style="background: white; z-index: 5"><time class="postlist-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate("LLLL dd yyyy") }}</time></span></h4>	<div class="row">
-		
-		
-		{% excerpt post %}
-		<div class="col-md-1">
-		<a href="{{ post.url }}" class="postlist-link">More...</a>
-		</div>
-		
-		
+  <h4 style="background: url(/img/bracket_line.gif) 0 50% repeat-x; text-align: center">
+  	<span style="background: white; z-index: 5">
+		<time class="postlist-date" datetime="{{ post.date | htmlDateString }}">
+			{{ post.date | readableDate("LLLL dd yyyy") }}
+		</time>
+	</span>
+  </h4>
+  <div class="row">
+	{% excerpt post %}
+	<div class="col-md-1 d-flex">
+		<span class="mt-auto">
+			<a href="{{ post.url }}" class="postlist-link">More...</a>
+		</span>
 	</div>
+  </div>
 {% endfor %}
 </div>
