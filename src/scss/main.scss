@@ -93,3 +93,30 @@ h1, h2, h3, h4, h5, h6
     width: 2em;
   }
 }
+
+.wfh-progress
+{
+  div 
+  {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    max-width: 200px;
+    max-height: 200px;
+  }
+  .wfh-background
+  {
+    background-image: url("../img/Ribbon.png"); 
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+    z-index: 20;  
+  }
+  .wfh-filled
+  {
+    offset-anchor: center bottom;
+    z-index: 10;
+    @extend .mt-auto;
+    background-color: purple;
+  }
+}
