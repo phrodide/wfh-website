@@ -204,9 +204,18 @@ function extractExcerpt(article) {
 	const firstP = htmlparser2.DomUtils.findOne(function (elem) {
 		return elem.name==='p';
 	},dom.childNodes);
-	const content2 = htmlparser2.DomUtils.innerText(firstP);
+	const text = htmlparser2.DomUtils.innerText(firstP);
+	const firstH = htmlparser2.DomUtils.findOne(function (elem) {
+		return elem.name==='h1';
+	},dom.childNodes);
+	const header = htmlparser2.DomUtils.innerText(firstH);
+	const firstImg = htmlparser2.DomUtils.findOne(function (elem) {
+		return elem.name==='source' && elem.attribs["srcset"].includes(".jpeg 250w");
+	},dom.childNodes);
+	var img = firstImg.attribs["srcset"];
+	img = img.slice(0,img.indexOf(" 250w"));
 
-    const excerpt = content.slice(0, content.indexOf("\n")) + "<p>" + content2 + "</p>";
+    const excerpt = "<div class=\"col-md-3\"><img src=\"" + img + "\"></div><div class=\"col-md-8\"><h2>" + header + "</h2><p>" + text + "</p></div>";
 
     return excerpt;
 }

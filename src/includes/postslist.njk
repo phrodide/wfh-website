@@ -1,9 +1,14 @@
-<ul class="postlist">
+<div class="container">
 {% for post in postslist | reverse %}
-	<li class="postlist-item{% if post.url == url %} postlist-item-active{% endif %}">
-		<a href="{{ post.url }}" class="postlist-link">{% excerpt post %}</a>
+  <h4 style="background: url(/img/bracket_line.gif) 0 50% repeat-x; text-align: center"><span style="background: white; z-index: 5"><time class="postlist-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate("LLLL dd yyyy") }}</time></span></h4>	<div class="row">
 		
-		<time class="postlist-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate("LLLL dd yyyy") }}</time>
-	</li>
+		
+		{% excerpt post %}
+		<div class="col-md-1">
+		<a href="{{ post.url }}" class="postlist-link">More...</a>
+		</div>
+		
+		
+	</div>
 {% endfor %}
-</ul>
+</div>
