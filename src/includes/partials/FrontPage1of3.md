@@ -3,4 +3,4 @@
 
 6pm to 10pm
 
-[More Details](/)
+[More Details](/About)
