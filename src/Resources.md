@@ -7,6 +7,6 @@ eleventyNavigation:
 
 ---
 
-# What to put here?
+# Forms
 
-Sean what did you want to see in this? Did you want the menu to have a link of PDF files? Did you want this to be an explainer of sorts?
+Use these forms to sign your team up! 
