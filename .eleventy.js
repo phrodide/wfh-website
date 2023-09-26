@@ -11,6 +11,7 @@ function eleventyConfig(config) {
 	// Passthroughs
 	config.addPassthroughCopy("src/img");
 	config.addPassthroughCopy("src/Blog/.attachments");
+	config.addPassthroughCopy("src/PDFs");
 
 	// Layout aliases
 	config.addLayoutAlias("base", "layouts/base.njk");
