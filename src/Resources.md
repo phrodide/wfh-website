@@ -18,3 +18,9 @@ Use these forms to sign your team up!
 - [2023 Money Submission Form](/PDFs/2023%20Money%20Submission%20Form.pdf): Once you've got your team down, make sure your properly kid it out! $20 per person per shirt. Survivor shirts are free!
 - [2023 WFH Fundraising flyer](/PDFs/2023%20Walk%20for%20Hope%20Fundraising%20flyer.pdf) : use this flyer to tell others at your organization what you're doing.
 - [2023 WFH Luminarias](/PDFs/2023%20Walk%20for%20Hope%20Luminarias.pdf): honor your loved ones the night of the walk, whether in support or in remembrance.
+
+Chaves County Walk for Hope Contact: 
+[Link text](walkforhoperoswell@gmail.com)
+
+HOW TO APPLY FOR AID: 
+Monica Fresques contact information (Kymera) (575) 627-9500
