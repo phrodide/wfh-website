@@ -20,7 +20,7 @@ Use these forms to sign your team up!
 - [2023 WFH Luminarias](/PDFs/2023%20Walk%20for%20Hope%20Luminarias.pdf): honor your loved ones the night of the walk, whether in support or in remembrance.
 
 Chaves County Walk for Hope Contact: 
-[Link text](walkforhoperoswell@gmail.com)
+[walkforhoperoswell@gmail.com](walkforhoperoswell@gmail.com)
 
 HOW TO APPLY FOR AID: 
 Monica Fresques contact information (Kymera) (575) 627-9500
