@@ -21,6 +21,7 @@ Use these forms to sign your team up!
 
 Chaves County Walk for Hope Contact: 
 [walkforhoperoswell@gmail.com](walkforhoperoswell@gmail.com)
+Phone: 575-637-8132
 
 HOW TO APPLY FOR AID: 
 Monica Fresques contact information (Kymera) (575) 627-9500
