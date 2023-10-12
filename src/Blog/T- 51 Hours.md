@@ -1,5 +1,5 @@
 ![image](.attachments/970cea761d0399630811d64ae77da5fda9445239.jpeg)
-**Why I Volunteer**
+# Why I Volunteer
 
 "I started volunteering with the C.C.C.F. in 2015 after being asked by a friend.  Little did I know what a difference doing so would make.  Part of my responsibility was processing the applications for funding.  One time I met with a caregiver that was having difficulty processing the bills for his father, so I helped him figure out how we could help him.  At the end of our session I had the privilege of praying with him.  He left with a sense of relief.  
 
