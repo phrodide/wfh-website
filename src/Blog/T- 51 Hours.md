@@ -37,7 +37,7 @@ We need all kinds of help on Saturday. If you can give even just an hour, it wou
 
 A reliable source tells us that there are some VERY exciting prizes to be claimed through some great raffles: 
 - gift baskets, 
-- gift certificates to Cerritos (go Taco Tuesdays!), 
+- gift certificates galore! (Like to Cerritos  - go Taco Tuesdays!), 
 - an obnoxiously large screen TV, 
 - Sony PlayStation 5
 
