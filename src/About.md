@@ -8,6 +8,8 @@ eleventyNavigation:
 ---
 # About Walk For Hope
 ### ** 2024 Walk for Hope is Oct 14, 2024**
+**6:00 pm -10:00 pm / Gateway Christian School Football Field**
+
 **CANCER AND ITS EFFECTS**
 
 No one ever wants to hear those words "You have cancer", yet every year, 1,800,000 new cases of cancer will be diagnosed in the United States with 606,000 people dying from the disease. It doesn't distinguish between race, economics, gender, or age. It is estimated that 37% of our population will receive this diagnosis. The costs are staggering: $151 billion is spent annually - greater than the gross domestic product of 137 nations! It creates depression, insecurity, and puts on hold or destroys the plans of people, their families, and their friends. 
