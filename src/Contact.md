@@ -9,7 +9,9 @@ eleventyNavigation:
 
 # Contact Us
 
-May 1, 2023
+### ** 2024 Walk for Hope is Oct 14, 2024**
+
+**6:00 pm -10:00 pm / Gateway Christian School Football Field**
 
 Dear Community Member and Walk for Hope Supporter: 
 
