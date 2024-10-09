@@ -1,5 +1,5 @@
 #
-## Saturday, October 14, 2023
+## Saturday, October 12, 2024
 
 6pm to 10pm
 
