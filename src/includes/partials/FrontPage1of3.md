@@ -1,6 +1,6 @@
 #
 ## Saturday, October 12, 2024
 
-6pm to 10pm
+4 pm to 8 pm
 
 [More Details](/About)
