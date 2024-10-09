@@ -2,7 +2,7 @@ var bootstrap = require('bootstrap');
 
 const intervalId = setInterval(() => {
     var gameTime = "";
-    const enterDateTime = new Date(2023, 9, 14, 18, 0, 0, 0);
+    const enterDateTime = new Date(2024, 9, 12, 18, 0, 0, 0);
     const Today = new Date();
     // tslint:disable-next-line:max-line-length
     const Todays_Date = (new Date(Today.getFullYear(), Today.getMonth(), Today.getDate(), Today.getHours(), Today.getMinutes(), Today.getSeconds())).getTime();
